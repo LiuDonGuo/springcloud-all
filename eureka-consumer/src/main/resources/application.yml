@@ -1,0 +1,10 @@
+server:
+  port: 8083
+eureka:
+  client:
+    service-url:
+      defaultZone: http://euk2.com:7002/eureka/
+
+spring:
+  application:
+    name: consumer

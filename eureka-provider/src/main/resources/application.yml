@@ -1,0 +1,14 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://euk2.com:7001/eureka/
+  instance:
+    metadata-map:
+      dalao: 自定义
+
+
+server:
+  port: 8082
+spring:
+  application:
+    name: provider
