@@ -11,5 +11,9 @@ eureka:
     # eureka节点名称
     hostname: euk1.com
     appname: EurekaServer
+
+  server:
+    #关闭自我保护机制
+    enable-self-preservation: false
 server:
   port: 7001
