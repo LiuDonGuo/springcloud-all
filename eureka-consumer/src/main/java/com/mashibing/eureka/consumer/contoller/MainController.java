@@ -27,10 +27,13 @@ public class MainController {
     EurekaClient client2;
 
     @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
     LoadBalancerClient lb;
 
     @GetMapping("/client")
-    public String client(){
+    public String client() {
         List<String> services = client.getServices();
         for (String service : services) {
             System.out.println(service);
@@ -40,7 +43,7 @@ public class MainController {
     }
 
     @GetMapping("/client2")
-    public String client2(){
+    public String client2() {
         List<InstanceInfo> instanceInfos = client2.getInstancesByVipAddress("provider", false);
         if (instanceInfos.size() > 0) {
             InstanceInfo instanceInfo = instanceInfos.get(0);
@@ -55,12 +58,20 @@ public class MainController {
     }
 
     @GetMapping("/client3")
-    public String client3(){
+    public String client3() {
         ServiceInstance instance = lb.choose("provider");
         String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/getHi";
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
         System.out.println("client3");
         return responseEntity.getBody();
+    }
+
+    @GetMapping("/client4")
+    public String client4() {
+        String url = "http://provider/getHi";
+        System.out.println("jrebel  22222");
+        String forObject = restTemplate.getForObject(url, String.class);
+        return forObject;
     }
 }
