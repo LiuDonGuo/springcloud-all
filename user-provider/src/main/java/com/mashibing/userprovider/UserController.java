@@ -11,6 +11,7 @@ public class UserController implements RegisterApi {
 
 
     @Override
+    @GetMapping("/alive")
     public String alive() {
         return "ok";
     }
